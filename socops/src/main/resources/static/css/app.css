@@ -1,7 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=Figtree:wght@400;500;600;700&display=swap');
+
 /* Soc Ops — Social Bingo utility stylesheet
    Derived from the original Blazor app's Tailwind-like helpers.
    Blazor-specific selectors (#blazor-error-ui, .blazor-error-boundary,
    .loading-progress) have been stripped out. */
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+:root {
+    --bg:         #07080f;
+    --bg-2:       #0d0f1a;
+    --bg-3:       #141726;
+    --border:     #1d2235;
+    --accent:     #00ff88;
+    --gold:       #ffc832;
+    --text-1:     #e8eaf2;
+    --text-2:     #7b85a0;
+    --text-3:     #3e4660;
+    --font-brand: 'Oxanium', monospace;
+    --font-body:  'Figtree', sans-serif;
+}
 
 html,
 body {
@@ -10,7 +27,9 @@ body {
 }
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-1);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -177,4 +196,45 @@ button:disabled { cursor: default; }
 
 .animate-\[bounce_0\.5s_ease-out\] {
     animation: bounce 0.5s ease-out;
+}
+
+/* ── Dark theme utilities ───────────────────────────────────────── */
+.bg-dark   { background: var(--bg); }
+.bg-dark-2 { background: var(--bg-2); }
+.bg-dark-3 { background: var(--bg-3); }
+
+.text-1      { color: var(--text-1); }
+.text-2      { color: var(--text-2); }
+.text-3      { color: var(--text-3); }
+.text-accent { color: var(--accent); }
+.text-gold   { color: var(--gold); }
+
+.font-brand { font-family: var(--font-brand); }
+
+.max-w-lg { max-width: 32rem; }
+
+/* ── Entrance animation ─────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim-fade-up  { animation: fadeInUp 0.5s ease both; }
+.anim-delay-1  { animation-delay: 0.06s; }
+.anim-delay-2  { animation-delay: 0.15s; }
+.anim-delay-3  { animation-delay: 0.26s; }
+.anim-delay-4  { animation-delay: 0.38s; }
+.anim-delay-5  { animation-delay: 0.52s; }
+
+/* ── Tile selection pop ─────────────────────────────────────────── */
+@keyframes tileSelect {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ── Victory title pulse ────────────────────────────────────────── */
+@keyframes victoryPulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(0,255,136,0.35); }
+    50%       { text-shadow: 0 0 45px rgba(0,255,136,0.75), 0 0 90px rgba(0,255,136,0.25); }
 }

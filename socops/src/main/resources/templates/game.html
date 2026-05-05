@@ -7,9 +7,314 @@
     <link rel="stylesheet" th:href="@{/css/app.css}"/>
     <link rel="icon" type="image/png" th:href="@{/favicon.png}"/>
     <style>
-        /* active-state tweaks that need pseudo-class selectors */
-        .tile-active:active { background-color: #f3f4f6 !important; }
-        .accent-active:active { background-color: #3b82f6 !important; }
+        /* ── Lobby background (dot grid + ambient glow) ──────────── */
+        .lobby-bg {
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(0,255,136,0.04) 0%, transparent 55%),
+                radial-gradient(circle, rgba(0,255,136,0.055) 1px, transparent 1px);
+            background-size: 100% 100%, 28px 28px;
+        }
+
+        /* ── Brand section ───────────────────────────────────────── */
+        .lobby-brand { margin-bottom: 2.5rem; }
+
+        .lobby-eyebrow {
+            font-size: 0.6rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.6rem;
+        }
+
+        .lobby-title {
+            font-family: var(--font-brand);
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: 0.65rem;
+            text-shadow: 0 0 60px rgba(0,255,136,0.1);
+        }
+
+        .lobby-accent-line {
+            width: 2.75rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin: 0 auto 0.75rem;
+            border-radius: 2px;
+        }
+
+        .lobby-subtitle {
+            font-size: 0.65rem;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600;
+            opacity: 0.75;
+        }
+
+        /* ── How-to card ─────────────────────────────────────────── */
+        .how-to-card {
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            border-left: 3px solid rgba(0,255,136,0.45);
+            border-radius: 0.5rem;
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .how-to-card__title {
+            font-family: var(--font-brand);
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            opacity: 0.7;
+            margin-bottom: 0.9rem;
+        }
+
+        .how-to-card__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .how-to-card__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--text-2);
+            line-height: 1.45;
+        }
+
+        .how-to-card__num {
+            font-family: var(--font-brand);
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.65;
+            min-width: 1.4rem;
+            padding-top: 0.12rem;
+        }
+
+        /* ── Primary action button ───────────────────────────────── */
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 2rem;
+            font-family: var(--font-brand);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: transparent;
+            border: 1px solid rgba(0,255,136,0.32);
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+        }
+
+        .start-btn:hover {
+            background: rgba(0,255,136,0.07);
+            border-color: rgba(0,255,136,0.65);
+            box-shadow: 0 0 28px rgba(0,255,136,0.1);
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+            background: rgba(0,255,136,0.11);
+        }
+
+        /* ── Game header ─────────────────────────────────────────── */
+        .game-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.7rem 1rem;
+            background: var(--bg-2);
+            border-bottom: 1px solid rgba(0,255,136,0.16);
+        }
+
+        .game-header__title {
+            font-family: var(--font-brand);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.24em;
+            color: var(--text-1);
+        }
+
+        .back-btn {
+            font-family: var(--font-brand);
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-2);
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            min-width: 4rem;
+        }
+
+        .back-btn:hover {
+            color: var(--text-1);
+            border-color: rgba(0,255,136,0.3);
+        }
+
+        /* ── Game hint ───────────────────────────────────────────── */
+        .game-hint {
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            color: var(--text-3);
+            text-align: center;
+            padding: 0.45rem 1rem;
+            text-transform: uppercase;
+        }
+
+        /* ── Bingo banner ────────────────────────────────────────── */
+        .bingo-banner {
+            font-family: var(--font-brand);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            color: var(--gold);
+            background: rgba(255,200,50,0.05);
+            border-bottom: 1px solid rgba(255,200,50,0.18);
+        }
+
+        /* ── Grid tiles ──────────────────────────────────────────── */
+        .tile {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            text-align: center;
+            border-radius: 0.25rem;
+            border-style: solid;
+            border-width: 1px;
+            min-height: 60px;
+            font-size: 0.65rem;
+            line-height: 1.25;
+            word-break: break-word;
+            hyphens: auto;
+            user-select: none;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease,
+                        box-shadow 0.15s ease, transform 0.1s ease;
+        }
+
+        .tile-enter {
+            animation: fadeInUp 0.35s ease both;
+        }
+
+        .tile-idle {
+            background: var(--bg-2);
+            border-color: var(--border);
+            color: var(--text-2);
+        }
+
+        .tile-idle:hover {
+            background: var(--bg-3);
+            border-color: rgba(0,255,136,0.2);
+            color: var(--text-1);
+        }
+
+        .tile-idle:active { transform: scale(0.95); }
+
+        .tile-marked {
+            background: rgba(0,255,136,0.06);
+            border-color: rgba(0,255,136,0.4);
+            color: var(--text-1);
+            box-shadow: 0 0 14px rgba(0,255,136,0.08),
+                        inset 0 0 10px rgba(0,255,136,0.04);
+            animation: tileSelect 0.22s ease both;
+        }
+
+        .tile-winner {
+            background: rgba(255,200,50,0.09);
+            border-color: rgba(255,200,50,0.52);
+            color: var(--gold);
+            box-shadow: 0 0 18px rgba(255,200,50,0.16),
+                        inset 0 0 10px rgba(255,200,50,0.06);
+            animation: tileSelect 0.22s ease both;
+        }
+
+        .tile-free {
+            background: rgba(0,255,136,0.04);
+            border-color: rgba(0,255,136,0.2);
+            color: rgba(0,255,136,0.5);
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: default;
+        }
+
+        .tile__tick {
+            position: absolute;
+            top: 0.15rem;
+            right: 0.2rem;
+            font-size: 0.58rem;
+            color: var(--accent);
+            opacity: 0.6;
+            line-height: 1;
+        }
+
+        /* ── Victory overlay ─────────────────────────────────────── */
+        .victory-backdrop {
+            background: rgba(2, 3, 8, 0.82);
+            backdrop-filter: blur(6px);
+        }
+
+        .victory-card {
+            background: var(--bg-3);
+            border: 1px solid rgba(0,255,136,0.18);
+            border-top: 2px solid var(--accent);
+            border-radius: 0.75rem;
+            padding: 2.25rem 1.75rem;
+            max-width: 20rem;
+            width: 100%;
+            box-shadow: 0 0 70px rgba(0,255,136,0.07);
+            animation: fadeInUp 0.35s ease both;
+        }
+
+        .victory-glyph {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+            filter: drop-shadow(0 0 10px rgba(255,200,50,0.5));
+        }
+
+        .victory-title {
+            font-family: var(--font-brand);
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            animation: victoryPulse 2s ease-in-out infinite;
+        }
+
+        .victory-subtitle {
+            font-size: 0.68rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-2);
+            margin-bottom: 1.75rem;
+        }
     </style>
 </head>
 <body class="h-full">
@@ -17,52 +322,50 @@
 <!-- ============================================================= -->
 <!--  LOBBY — visible before a game starts                          -->
 <!-- ============================================================= -->
-<div id="lobbyView" class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
+<div id="lobbyView" class="flex flex-col items-center justify-center min-h-full p-6 bg-dark lobby-bg">
     <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
-            </ul>
+        <div class="lobby-brand anim-fade-up">
+            <p class="lobby-eyebrow">Welcome to</p>
+            <h1 class="lobby-title">SOC OPS</h1>
+            <div class="lobby-accent-line"></div>
+            <p class="lobby-subtitle">Social Bingo</p>
         </div>
 
-        <button onclick="launchGame()"
-                class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg accent-active transition-colors">
+        <div class="how-to-card anim-fade-up anim-delay-2">
+            <p class="how-to-card__title">How to play</p>
+            <ol class="how-to-card__list">
+                <li><span class="how-to-card__num">01</span><span>Find people who match the questions</span></li>
+                <li><span class="how-to-card__num">02</span><span>Tap a square when you find a match</span></li>
+                <li><span class="how-to-card__num">03</span><span>Get 5 in a row to win!</span></li>
+            </ol>
+        </div>
+
+        <button onclick="launchGame()" class="start-btn anim-fade-up anim-delay-3">
             Start Game
         </button>
+
     </div>
 </div>
 
 <!-- ============================================================= -->
 <!--  ACTIVE GAME — board, header, optional bingo banner            -->
 <!-- ============================================================= -->
-<div id="activeView" class="flex flex-col min-h-full bg-gray-50" style="display:none">
+<div id="activeView" class="flex flex-col min-h-full bg-dark" style="display:none">
 
     <!-- top bar -->
-    <header class="flex items-center justify-between p-3 bg-white border-b border-gray-200">
-        <button onclick="retreatToLobby()"
-                class="text-gray-500 text-sm px-3 py-1\.5 rounded tile-active">
-            &#8592; Back
-        </button>
-        <h1 class="font-bold text-gray-900">Soc Ops</h1>
+    <header class="game-header">
+        <button onclick="retreatToLobby()" class="back-btn">&#8592; Back</button>
+        <h1 class="game-header__title">SOC OPS</h1>
         <div class="w-16"></div>
     </header>
 
     <!-- hint -->
-    <p class="text-center text-gray-500 text-sm py-2 px-4">
-        Tap a square when you find someone who matches it.
-    </p>
+    <p class="game-hint">Tap a square when you find someone who matches it</p>
 
     <!-- bingo banner (hidden until victory) -->
-    <div id="bingoBanner"
-         class="bg-amber-100 text-amber-800 text-center py-2 font-semibold text-sm"
-         style="display:none">
-        &#127881; BINGO! You got a line!
+    <div id="bingoBanner" class="bingo-banner" style="display:none">
+        &#9733; BINGO — Line Complete!
     </div>
 
     <!-- the 5×5 grid -->
@@ -78,14 +381,13 @@
 <!--  VICTORY MODAL — overlays the board                            -->
 <!-- ============================================================= -->
 <div id="victoryOverlay"
-     class="fixed inset-0 bg-black\/50 flex items-center justify-center p-4 z-50"
+     class="victory-backdrop fixed inset-0 flex items-center justify-center p-4 z-50"
      style="display:none">
-    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center shadow-xl animate-[bounce_0.5s_ease-out]">
-        <div class="text-5xl mb-4">&#127881;</div>
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">BINGO!</h2>
-        <p class="text-gray-600 mb-6">You completed a line!</p>
-        <button onclick="dismissVictoryModal()"
-                class="w-full bg-accent text-white font-semibold py-3 px-6 rounded-lg accent-active transition-colors">
+    <div class="victory-card text-center">
+        <div class="victory-glyph">&#9733;</div>
+        <h2 class="victory-title">BINGO!</h2>
+        <p class="victory-subtitle">Line Completed</p>
+        <button onclick="dismissVictoryModal()" class="start-btn">
             Keep Playing
         </button>
     </div>
@@ -103,10 +405,11 @@
     var PERSIST_KEY = "socops-bingo-snapshot";
 
     /* ── state ────────────────────────────────────────────────── */
-    var liveTiles   = [];          /* Array of BingoCell objects  */
-    var streakFound = null;        /* WinningStreak or null       */
-    var modalShown  = false;
-    var currentPhase = "LOBBY";    /* LOBBY | ACTIVE | VICTORY    */
+    var liveTiles    = [];          /* Array of BingoCell objects  */
+    var streakFound  = null;        /* WinningStreak or null       */
+    var modalShown   = false;
+    var currentPhase = "LOBBY";     /* LOBBY | ACTIVE | VICTORY    */
+    var isFirstRender = true;       /* drives tile entrance animation */
 
     /* ── DOM refs ─────────────────────────────────────────────── */
     var lobbyDiv   = document.getElementById("lobbyView");
@@ -128,47 +431,42 @@
     function paintGrid() {
         gridDiv.innerHTML = "";
         var winIds = streakFound ? gatherStreakIds(streakFound) : {};
+        var firstRender = isFirstRender;
+        isFirstRender = false;
 
         for (var t = 0; t < liveTiles.length; t++) {
             var tile = liveTiles[t];
             var btn = document.createElement("button");
 
-            /* base styling identical to the original Blazor BingoSquare */
-            var base = "relative flex items-center justify-center p-1 text-center " +
-                       "border border-gray-300 rounded transition-all duration-150 " +
-                       "select-none min-h-[60px] text-xs leading-tight";
-
-            var state;
-            if (tile.selected) {
-                state = winIds[tile.id]
-                    ? "bg-amber-200 border-amber-400 text-amber-900"
-                    : "bg-marked border-marked-border text-green-800";
+            var stateClass;
+            if (tile.freeCell) {
+                stateClass = "tile-free";
+            } else if (tile.selected) {
+                stateClass = winIds[tile.id] ? "tile-winner" : "tile-marked";
             } else {
-                state = "bg-white text-gray-700 tile-active";
+                stateClass = "tile-idle";
             }
 
-            var extra = tile.freeCell ? " font-bold text-sm" : "";
-            btn.className = base + " " + state + extra;
+            btn.className = "tile " + stateClass + (firstRender ? " tile-enter" : "");
+            if (firstRender) {
+                btn.style.animationDelay = (t * 0.018) + "s";
+            }
 
             if (tile.freeCell) { btn.disabled = true; }
             btn.setAttribute("aria-pressed", String(tile.selected));
             btn.setAttribute("aria-label", tile.freeCell ? "Free space" : tile.prompt);
 
-            /* inner label */
             var labelSpan = document.createElement("span");
-            labelSpan.className = "wrap-break-word hyphens-auto";
             labelSpan.textContent = tile.prompt;
             btn.appendChild(labelSpan);
 
-            /* check-mark for marked non-free tiles */
             if (tile.selected && !tile.freeCell) {
                 var tick = document.createElement("span");
-                tick.className = "absolute top-0.5 right-0.5 text-green-600 text-xs";
+                tick.className = "tile__tick";
                 tick.textContent = "\u2713";
                 btn.appendChild(tick);
             }
 
-            /* click handler (closure over tile id) */
             btn.addEventListener("click", (function (cid) {
                 return function () { onTileTapped(cid); };
             })(tile.id));
@@ -291,10 +589,11 @@
         fetch("/api/bingo/fresh-board")
             .then(function (resp) { return resp.json(); })
             .then(function (cells) {
-                liveTiles   = cells;
-                streakFound = null;
-                modalShown  = false;
+                liveTiles    = cells;
+                streakFound  = null;
+                modalShown   = false;
                 currentPhase = "ACTIVE";
+                isFirstRender = true;
                 persistSnapshot();
                 paintGrid();
                 showPhase("ACTIVE");

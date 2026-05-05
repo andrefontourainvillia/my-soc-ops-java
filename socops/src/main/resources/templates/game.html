@@ -133,6 +133,72 @@
             background: rgba(0,255,136,0.11);
         }
 
+        .mode-grid {
+            display: grid;
+            gap: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .mode-card {
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem 1.1rem;
+            text-align: left;
+            box-shadow: 0 0 30px rgba(0,255,136,0.03);
+        }
+
+        .mode-card__eyebrow {
+            font-family: var(--font-brand);
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.72;
+            margin-bottom: 0.45rem;
+        }
+
+        .mode-card__title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 0.35rem;
+        }
+
+        .mode-card__body {
+            font-size: 0.8rem;
+            color: var(--text-2);
+            line-height: 1.45;
+            margin-bottom: 0.9rem;
+        }
+
+        .mode-card__action {
+            width: 100%;
+        }
+
+        .mode-card--shuffle {
+            border-color: rgba(255, 200, 50, 0.18);
+            background:
+                linear-gradient(135deg, rgba(255,200,50,0.08), transparent 42%),
+                var(--bg-3);
+        }
+
+        .mode-card--shuffle .mode-card__eyebrow {
+            color: var(--gold);
+        }
+
+        .mode-card--shuffle .start-btn {
+            color: var(--gold);
+            border-color: rgba(255, 200, 50, 0.32);
+        }
+
+        .mode-card--shuffle .start-btn:hover {
+            background: rgba(255, 200, 50, 0.08);
+            border-color: rgba(255, 200, 50, 0.6);
+            box-shadow: 0 0 28px rgba(255, 200, 50, 0.12);
+        }
+
         /* ── Game header ─────────────────────────────────────────── */
         .game-header {
             display: flex;
@@ -180,6 +246,17 @@
             text-align: center;
             padding: 0.45rem 1rem;
             text-transform: uppercase;
+        }
+
+        .game-mode-label {
+            font-family: var(--font-brand);
+            font-size: 0.56rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-align: center;
+            padding: 0.7rem 1rem 0;
+            opacity: 0.78;
         }
 
         /* ── Bingo banner ────────────────────────────────────────── */
@@ -273,6 +350,300 @@
             line-height: 1;
         }
 
+        .hunt-shell {
+            width: 100%;
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        .hunt-progress {
+            padding: 0.85rem 1rem 0;
+            max-width: 32rem;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .hunt-progress__meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.45rem;
+            gap: 0.75rem;
+        }
+
+        .hunt-progress__label,
+        .hunt-progress__value {
+            font-family: var(--font-brand);
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-2);
+        }
+
+        .hunt-progress__track {
+            width: 100%;
+            height: 0.45rem;
+            border-radius: 999px;
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .hunt-progress__bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, rgba(0,255,136,0.4), rgba(0,255,136,0.9));
+            transition: width 0.2s ease;
+        }
+
+        .hunt-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding: 1rem;
+        }
+
+        .hunt-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text-1);
+            text-align: left;
+            transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .hunt-item:hover {
+            border-color: rgba(0,255,136,0.28);
+            background: var(--bg-3);
+        }
+
+        .hunt-item--selected {
+            background: rgba(0,255,136,0.06);
+            border-color: rgba(0,255,136,0.38);
+            box-shadow: inset 0 0 14px rgba(0,255,136,0.04);
+        }
+
+        .hunt-item__checkbox {
+            width: 1.05rem;
+            height: 1.05rem;
+            border-radius: 0.2rem;
+            border: 1px solid rgba(0,255,136,0.34);
+            margin-top: 0.05rem;
+            flex: 0 0 auto;
+            position: relative;
+            background: rgba(0,255,136,0.02);
+        }
+
+        .hunt-item--selected .hunt-item__checkbox::after {
+            content: "";
+            position: absolute;
+            left: 0.28rem;
+            top: 0.07rem;
+            width: 0.24rem;
+            height: 0.54rem;
+            border-right: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+            transform: rotate(45deg);
+        }
+
+        .hunt-item__text {
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: inherit;
+        }
+
+        .hunt-item--selected .hunt-item__text {
+            color: var(--text-1);
+        }
+
+        .shuffle-shell {
+            width: 100%;
+            max-width: 30rem;
+            margin: 0 auto;
+            padding: 1.25rem 1rem 2rem;
+            box-sizing: border-box;
+        }
+
+        .shuffle-stage {
+            position: relative;
+            overflow: hidden;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 200, 50, 0.14);
+            background:
+                radial-gradient(circle at top, rgba(255,200,50,0.14), transparent 38%),
+                linear-gradient(180deg, rgba(20,23,38,0.98), rgba(13,15,26,0.98));
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+        }
+
+        .shuffle-stage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 22px 22px;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        .shuffle-stage__label {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1rem;
+            font-family: var(--font-brand);
+            font-size: 0.58rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            text-align: center;
+            color: var(--gold);
+            opacity: 0.85;
+        }
+
+        .shuffle-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            min-height: 22rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 200, 50, 0.16);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left;
+            background:
+                radial-gradient(circle at top left, rgba(255,200,50,0.12), transparent 30%),
+                linear-gradient(160deg, rgba(17,20,34,0.98), rgba(8,10,18,0.98));
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .shuffle-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 200, 50, 0.26);
+            box-shadow: 0 0 28px rgba(255, 200, 50, 0.08);
+        }
+
+        .shuffle-card:active {
+            transform: scale(0.985);
+        }
+
+        .shuffle-card--facedown {
+            background:
+                linear-gradient(135deg, rgba(255,200,50,0.16), rgba(255,200,50,0.03) 28%, transparent 28%),
+                linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent),
+                linear-gradient(160deg, rgba(17,20,34,0.98), rgba(8,10,18,0.98));
+            background-size: auto, 18px 18px, auto;
+        }
+
+        .shuffle-card--revealed {
+            border-color: rgba(0,255,136,0.24);
+            box-shadow: 0 0 34px rgba(0,255,136,0.08);
+        }
+
+        .shuffle-card__meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            font-family: var(--font-brand);
+            font-size: 0.62rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-2);
+        }
+
+        .shuffle-card__index {
+            color: var(--gold);
+        }
+
+        .shuffle-card__prompt {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.35rem;
+            line-height: 1.4;
+            color: var(--text-1);
+            padding: 1.2rem 0;
+        }
+
+        .shuffle-card__prompt--placeholder {
+            font-family: var(--font-brand);
+            font-size: 1rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 200, 50, 0.9);
+        }
+
+        .shuffle-card__prompt--empty {
+            font-size: 0.95rem;
+            color: var(--text-2);
+        }
+
+        .shuffle-card__foot {
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-2);
+            text-align: center;
+        }
+
+        .shuffle-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .shuffle-redraw {
+            width: 100%;
+            max-width: 16rem;
+            color: var(--gold);
+            border-color: rgba(255, 200, 50, 0.34);
+        }
+
+        .shuffle-redraw:hover {
+            background: rgba(255, 200, 50, 0.08);
+            border-color: rgba(255, 200, 50, 0.58);
+            box-shadow: 0 0 24px rgba(255, 200, 50, 0.1);
+        }
+
+        @media (max-width: 640px) {
+            .hunt-list {
+                padding: 0.8rem;
+            }
+
+            .hunt-item {
+                padding: 0.8rem 0.85rem;
+            }
+
+            .shuffle-shell {
+                padding: 0.9rem 0.8rem 1.5rem;
+            }
+
+            .shuffle-stage {
+                padding: 0.9rem;
+            }
+
+            .shuffle-card {
+                min-height: 18.5rem;
+                padding: 1.15rem;
+            }
+
+            .shuffle-card__prompt {
+                font-size: 1.08rem;
+            }
+        }
+
         /* ── Victory overlay ─────────────────────────────────────── */
         .victory-backdrop {
             background: rgba(2, 3, 8, 0.82);
@@ -329,21 +700,46 @@
             <p class="lobby-eyebrow">Welcome to</p>
             <h1 class="lobby-title">SOC OPS</h1>
             <div class="lobby-accent-line"></div>
-            <p class="lobby-subtitle">Social Bingo</p>
+            <p class="lobby-subtitle">Choose your social mission</p>
         </div>
 
         <div class="how-to-card anim-fade-up anim-delay-2">
-            <p class="how-to-card__title">How to play</p>
+            <p class="how-to-card__title">How it works</p>
             <ol class="how-to-card__list">
-                <li><span class="how-to-card__num">01</span><span>Find people who match the questions</span></li>
-                <li><span class="how-to-card__num">02</span><span>Tap a square when you find a match</span></li>
-                <li><span class="how-to-card__num">03</span><span>Get 5 in a row to win!</span></li>
+                <li><span class="how-to-card__num">01</span><span>Pick Bingo for a line win, Scavenger Hunt for a full clear, or Card Deck Shuffle for a single prompt draw</span></li>
+                <li><span class="how-to-card__num">02</span><span>Tap into your mode and use the prompt to start a new conversation with someone nearby</span></li>
+                <li><span class="how-to-card__num">03</span><span>Your current progress stays separate for each mode on this device</span></li>
             </ol>
         </div>
 
-        <button onclick="launchGame()" class="start-btn anim-fade-up anim-delay-3">
-            Start Game
-        </button>
+        <div class="mode-grid anim-fade-up anim-delay-3">
+            <section class="mode-card">
+                <p class="mode-card__eyebrow">Classic</p>
+                <h2 class="mode-card__title">Bingo</h2>
+                <p class="mode-card__body">Use the full board, keep the centre free cell, and finish any row, column, or diagonal.</p>
+                <button onclick="launchGame('bingo')" class="start-btn mode-card__action">
+                    Start Bingo
+                </button>
+            </section>
+
+            <section class="mode-card">
+                <p class="mode-card__eyebrow">Checklist</p>
+                <h2 class="mode-card__title">Scavenger Hunt</h2>
+                <p class="mode-card__body">Work through all 24 prompts as a checklist with progress tracking and no free cell.</p>
+                <button onclick="launchGame('scavenger')" class="start-btn mode-card__action">
+                    Start Scavenger Hunt
+                </button>
+            </section>
+
+            <section class="mode-card mode-card--shuffle">
+                <p class="mode-card__eyebrow">Quick Draw</p>
+                <h2 class="mode-card__title">Card Deck Shuffle</h2>
+                <p class="mode-card__body">Open a virtual deck, tap once, and reveal a single icebreaker question you can use immediately.</p>
+                <button onclick="launchGame('shuffle')" class="start-btn mode-card__action">
+                    Open Card Deck
+                </button>
+            </section>
+        </div>
 
     </div>
 </div>
@@ -360,12 +756,24 @@
         <div class="w-16"></div>
     </header>
 
+    <p id="gameModeLabel" class="game-mode-label"></p>
+
     <!-- hint -->
-    <p class="game-hint">Tap a square when you find someone who matches it</p>
+    <p id="gameHint" class="game-hint"></p>
 
     <!-- bingo banner (hidden until victory) -->
     <div id="bingoBanner" class="bingo-banner" style="display:none">
         &#9733; BINGO — Line Complete!
+    </div>
+
+    <div id="huntProgress" class="hunt-progress" style="display:none">
+        <div class="hunt-progress__meta">
+            <span class="hunt-progress__label">Checklist Progress</span>
+            <span id="huntProgressValue" class="hunt-progress__value">0 / 24</span>
+        </div>
+        <div class="hunt-progress__track">
+            <div id="huntProgressBar" class="hunt-progress__bar"></div>
+        </div>
     </div>
 
     <!-- the 5×5 grid -->
@@ -373,6 +781,20 @@
         <div id="gridContainer"
              class="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
             <!-- tiles injected by JS -->
+        </div>
+        <div id="huntContainer" class="hunt-shell" style="display:none">
+            <div id="huntList" class="hunt-list"></div>
+        </div>
+        <div id="shuffleContainer" class="shuffle-shell" style="display:none">
+            <div class="shuffle-stage">
+                <p class="shuffle-stage__label">Tap The Deck To Draw</p>
+                <div id="shuffleCardMount"></div>
+                <div class="shuffle-actions">
+                    <button id="shuffleRedrawButton" onclick="drawAnotherCard()" class="start-btn shuffle-redraw" style="display:none">
+                        Draw Another Card
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -385,10 +807,10 @@
      style="display:none">
     <div class="victory-card text-center">
         <div class="victory-glyph">&#9733;</div>
-        <h2 class="victory-title">BINGO!</h2>
-        <p class="victory-subtitle">Line Completed</p>
+        <h2 id="victoryTitle" class="victory-title">BINGO!</h2>
+        <p id="victorySubtitle" class="victory-subtitle">Line Completed</p>
         <button onclick="dismissVictoryModal()" class="start-btn">
-            Keep Playing
+            Continue
         </button>
     </div>
 </div>
@@ -402,12 +824,44 @@
 
     var SIDE = 5;
     var TOTAL_CELLS = SIDE * SIDE;
-    var PERSIST_KEY = "socops-bingo-snapshot";
+    var STORAGE_KEYS = {
+        bingo: "socops-bingo-snapshot",
+        scavenger: "socops-scavenger-snapshot",
+        shuffle: "socops-shuffle-snapshot"
+    };
+    var ACTIVE_MODE_KEY = "socops-active-mode";
+    var GAME_MODES = {
+        bingo: {
+            endpoint: "/api/bingo/fresh-board",
+            label: "Bingo Mode",
+            hint: "Tap a square when you find someone who matches it",
+            victoryTitle: "BINGO!",
+            victorySubtitle: "Line Completed",
+            bannerText: "\u2605 BINGO \u2014 Line Complete!"
+        },
+        scavenger: {
+            endpoint: "/api/scavenger-hunt/fresh-board",
+            label: "Scavenger Hunt",
+            hint: "Check off every prompt to complete the hunt",
+            victoryTitle: "COMPLETE!",
+            victorySubtitle: "All Prompts Cleared",
+            bannerText: ""
+        },
+        shuffle: {
+            endpoint: "/api/card-deck/fresh-card",
+            label: "Card Deck Shuffle",
+            hint: "Tap the deck to reveal one random question, then redraw whenever you want",
+            victoryTitle: "",
+            victorySubtitle: "",
+            bannerText: ""
+        }
+    };
 
     /* ── state ────────────────────────────────────────────────── */
     var liveTiles    = [];          /* Array of BingoCell objects  */
     var streakFound  = null;        /* WinningStreak or null       */
     var modalShown   = false;
+    var currentMode  = null;        /* bingo | scavenger           */
     var currentPhase = "LOBBY";     /* LOBBY | ACTIVE | VICTORY    */
     var isFirstRender = true;       /* drives tile entrance animation */
 
@@ -415,16 +869,55 @@
     var lobbyDiv   = document.getElementById("lobbyView");
     var activeDiv  = document.getElementById("activeView");
     var gridDiv    = document.getElementById("gridContainer");
+    var huntDiv    = document.getElementById("huntContainer");
+    var huntListDiv = document.getElementById("huntList");
+    var huntProgressDiv = document.getElementById("huntProgress");
+    var huntProgressValue = document.getElementById("huntProgressValue");
+    var huntProgressBar = document.getElementById("huntProgressBar");
+    var shuffleDiv = document.getElementById("shuffleContainer");
+    var shuffleCardMountDiv = document.getElementById("shuffleCardMount");
+    var shuffleRedrawButton = document.getElementById("shuffleRedrawButton");
     var bannerDiv  = document.getElementById("bingoBanner");
     var overlayDiv = document.getElementById("victoryOverlay");
+    var modeLabelDiv = document.getElementById("gameModeLabel");
+    var hintDiv = document.getElementById("gameHint");
+    var victoryTitleDiv = document.getElementById("victoryTitle");
+    var victorySubtitleDiv = document.getElementById("victorySubtitle");
 
     /* ── phase switching ──────────────────────────────────────── */
     function showPhase(phase) {
         currentPhase = phase;
         lobbyDiv.style.display   = (phase === "LOBBY") ? "" : "none";
         activeDiv.style.display  = (phase !== "LOBBY") ? "" : "none";
-        bannerDiv.style.display  = (streakFound)       ? "" : "none";
-        overlayDiv.style.display = (modalShown)        ? "" : "none";
+        bannerDiv.style.display  = (currentMode === "bingo" && streakFound) ? "" : "none";
+        overlayDiv.style.display = (currentMode !== "shuffle" && modalShown) ? "" : "none";
+    }
+
+    function modeConfig() {
+        return GAME_MODES[currentMode] || GAME_MODES.bingo;
+    }
+
+    function isScavengerMode() {
+        return currentMode === "scavenger";
+    }
+
+    function isShuffleMode() {
+        return currentMode === "shuffle";
+    }
+
+    function isScavengerComplete(board) {
+        return !!board.length && board.every(function (item) {
+            return item.selected;
+        });
+    }
+
+    function updateModeCopy() {
+        var config = modeConfig();
+        modeLabelDiv.textContent = config.label;
+        hintDiv.textContent = config.hint;
+        bannerDiv.textContent = config.bannerText;
+        victoryTitleDiv.textContent = config.victoryTitle;
+        victorySubtitleDiv.textContent = config.victorySubtitle;
     }
 
     /* ── board rendering ──────────────────────────────────────── */
@@ -475,21 +968,156 @@
         }
     }
 
+    function paintHuntList() {
+        huntListDiv.innerHTML = "";
+
+        for (var itemIndex = 0; itemIndex < liveTiles.length; itemIndex++) {
+            var item = liveTiles[itemIndex];
+            var row = document.createElement("button");
+            row.className = "hunt-item" + (item.selected ? " hunt-item--selected" : "");
+            row.setAttribute("type", "button");
+            row.setAttribute("aria-pressed", String(item.selected));
+            row.setAttribute("aria-label", item.prompt);
+
+            var checkbox = document.createElement("span");
+            checkbox.className = "hunt-item__checkbox";
+            checkbox.setAttribute("aria-hidden", "true");
+            row.appendChild(checkbox);
+
+            var text = document.createElement("span");
+            text.className = "hunt-item__text";
+            text.textContent = item.prompt;
+            row.appendChild(text);
+
+            row.addEventListener("click", (function (cid) {
+                return function () { onTileTapped(cid); };
+            })(item.id));
+
+            huntListDiv.appendChild(row);
+        }
+    }
+
+    function paintHuntProgress() {
+        var completed = liveTiles.filter(function (item) {
+            return item.selected;
+        }).length;
+        var percent = liveTiles.length ? (completed / liveTiles.length) * 100 : 0;
+
+        huntProgressValue.textContent = completed + " / " + liveTiles.length;
+        huntProgressBar.style.width = percent + "%";
+    }
+
+    function paintShuffleCard() {
+        shuffleCardMountDiv.innerHTML = "";
+
+        var card = liveTiles[0] || null;
+        var revealed = !!(card && card.selected);
+        var cardButton = document.createElement("button");
+        cardButton.className = "shuffle-card " + (revealed ? "shuffle-card--revealed" : "shuffle-card--facedown");
+        cardButton.setAttribute("type", "button");
+        cardButton.setAttribute("aria-pressed", String(revealed));
+        cardButton.setAttribute("aria-label", revealed && card ? card.prompt : "Tap to reveal a random card");
+        cardButton.addEventListener("click", function () {
+            if (card && !card.selected) {
+                onTileTapped(card.id);
+            }
+        });
+
+        var meta = document.createElement("div");
+        meta.className = "shuffle-card__meta";
+
+        var index = document.createElement("span");
+        index.className = "shuffle-card__index";
+        index.textContent = "Card 01";
+        meta.appendChild(index);
+
+        var state = document.createElement("span");
+        state.textContent = revealed ? "Question Live" : "Face Down";
+        meta.appendChild(state);
+        cardButton.appendChild(meta);
+
+        var prompt = document.createElement("div");
+        prompt.className = "shuffle-card__prompt";
+        if (!card) {
+            prompt.className += " shuffle-card__prompt--empty";
+            prompt.textContent = "No card loaded yet. Draw one to start.";
+        } else if (revealed) {
+            prompt.textContent = card.prompt;
+        } else {
+            prompt.className += " shuffle-card__prompt--placeholder";
+            prompt.textContent = "Tap To Reveal";
+        }
+        cardButton.appendChild(prompt);
+
+        var foot = document.createElement("div");
+        foot.className = "shuffle-card__foot";
+        foot.textContent = revealed ? "Use this question, then pull a fresh card when you are ready." : "One tap reveals a random conversation starter.";
+        cardButton.appendChild(foot);
+
+        shuffleCardMountDiv.appendChild(cardButton);
+        shuffleRedrawButton.style.display = revealed ? "" : "none";
+    }
+
+    function paintBoard() {
+        updateModeCopy();
+
+        if (isShuffleMode()) {
+            gridDiv.style.display = "none";
+            huntDiv.style.display = "none";
+            huntProgressDiv.style.display = "none";
+            shuffleDiv.style.display = "";
+            bannerDiv.style.display = "none";
+            paintShuffleCard();
+            return;
+        }
+
+        if (isScavengerMode()) {
+            gridDiv.style.display = "none";
+            huntDiv.style.display = "";
+            huntProgressDiv.style.display = "";
+            shuffleDiv.style.display = "none";
+            bannerDiv.style.display = "none";
+            paintHuntList();
+            paintHuntProgress();
+            return;
+        }
+
+        huntDiv.style.display = "none";
+        huntProgressDiv.style.display = "none";
+        shuffleDiv.style.display = "none";
+        gridDiv.style.display = "grid";
+        paintGrid();
+    }
+
     /* ── tile tap logic ───────────────────────────────────────── */
     function onTileTapped(cellId) {
+        if (isShuffleMode()) {
+            liveTiles = flipTile(liveTiles, cellId);
+            currentPhase = "ACTIVE";
+            modalShown = false;
+            persistSnapshot();
+            paintBoard();
+            return;
+        }
+
         liveTiles = flipTile(liveTiles, cellId);
 
-        if (!streakFound) {
+        if (!isScavengerMode() && !streakFound) {
             var detected = scanForStreak(liveTiles);
             if (detected) {
                 streakFound = detected;
                 currentPhase = "VICTORY";
                 modalShown = true;
             }
+        } else if (isScavengerMode() && isScavengerComplete(liveTiles)) {
+            currentPhase = "VICTORY";
+            modalShown = true;
+        } else {
+            currentPhase = "ACTIVE";
         }
         persistSnapshot();
-        paintGrid();
-        bannerDiv.style.display  = streakFound ? "" : "none";
+        paintBoard();
+        bannerDiv.style.display  = (currentMode === "bingo" && streakFound) ? "" : "none";
         overlayDiv.style.display = modalShown  ? "" : "none";
     }
 
@@ -558,54 +1186,124 @@
     }
 
     /* ── localStorage persistence ─────────────────────────────── */
+    function storageKeyForMode(mode) {
+        return STORAGE_KEYS[mode] || STORAGE_KEYS.bingo;
+    }
+
     function persistSnapshot() {
+        if (!currentMode) { return; }
         try {
             var blob = JSON.stringify({
+                mode: currentMode,
                 phase: currentPhase,
                 tiles: liveTiles,
                 streak: streakFound,
                 modal: modalShown
             });
-            localStorage.setItem(PERSIST_KEY, blob);
+            localStorage.setItem(storageKeyForMode(currentMode), blob);
+            if (currentPhase === "LOBBY") {
+                localStorage.removeItem(ACTIVE_MODE_KEY);
+            } else {
+                localStorage.setItem(ACTIVE_MODE_KEY, currentMode);
+            }
         } catch (_) { /* storage full or unavailable */ }
     }
 
-    function restoreSnapshot() {
+    function restoreSnapshot(mode) {
         try {
-            var raw = localStorage.getItem(PERSIST_KEY);
+            var raw = localStorage.getItem(storageKeyForMode(mode));
             if (!raw) { return false; }
             var snap = JSON.parse(raw);
-            if (!snap.tiles || snap.tiles.length !== TOTAL_CELLS) { return false; }
+            if (!snap.tiles) { return false; }
+            if (mode === "bingo" && snap.tiles.length !== TOTAL_CELLS) { return false; }
+            if (mode === "scavenger" && snap.tiles.length !== TOTAL_CELLS - 1) { return false; }
+            if (mode === "shuffle" && snap.tiles.length !== 1) { return false; }
+            currentMode = mode;
             liveTiles   = snap.tiles;
             streakFound = snap.streak || null;
             modalShown  = !!snap.modal;
             currentPhase = snap.phase || "ACTIVE";
+            if (isScavengerMode() && !modalShown && isScavengerComplete(liveTiles)) {
+                currentPhase = "VICTORY";
+            }
             return currentPhase !== "LOBBY";
         } catch (_) { return false; }
     }
 
-    /* ── public API (called from onclick attrs) ───────────────── */
-    window.launchGame = function () {
-        fetch("/api/bingo/fresh-board")
-            .then(function (resp) { return resp.json(); })
+    function bootstrapSnapshot() {
+        var activeMode = null;
+        try {
+            activeMode = localStorage.getItem(ACTIVE_MODE_KEY);
+        } catch (_) {
+            activeMode = null;
+        }
+
+        if (activeMode && restoreSnapshot(activeMode)) {
+            return true;
+        }
+        if (restoreSnapshot("bingo")) {
+            return true;
+        }
+        return false;
+    }
+
+    function fetchModePayload(endpoint) {
+        return fetch(endpoint).then(function (resp) {
+            return resp.json();
+        });
+    }
+
+    function fetchFreshShuffleCard() {
+        return fetchModePayload(GAME_MODES.shuffle.endpoint).then(function (cards) {
+            liveTiles = cards;
+            streakFound = null;
+            modalShown = false;
+            currentPhase = "ACTIVE";
+            isFirstRender = false;
+            persistSnapshot();
+            paintBoard();
+            showPhase("ACTIVE");
+        });
+    }
+
+    function loadMode(mode) {
+        currentMode = mode;
+        if (restoreSnapshot(mode)) {
+            isFirstRender = !isScavengerMode();
+            paintBoard();
+            showPhase(currentPhase);
+            return;
+        }
+
+        if (isShuffleMode()) {
+            fetchFreshShuffleCard();
+            return;
+        }
+
+        fetchModePayload(modeConfig().endpoint)
             .then(function (cells) {
                 liveTiles    = cells;
                 streakFound  = null;
                 modalShown   = false;
                 currentPhase = "ACTIVE";
-                isFirstRender = true;
+                isFirstRender = !isScavengerMode();
                 persistSnapshot();
-                paintGrid();
+                paintBoard();
                 showPhase("ACTIVE");
             });
+    }
+
+    /* ── public API (called from onclick attrs) ───────────────── */
+    window.launchGame = function (mode) {
+        loadMode(mode || "bingo");
     };
 
     window.retreatToLobby = function () {
-        liveTiles   = [];
-        streakFound = null;
-        modalShown  = false;
+        modalShown = false;
         currentPhase = "LOBBY";
-        persistSnapshot();
+        try {
+            localStorage.removeItem(ACTIVE_MODE_KEY);
+        } catch (_) { /* storage unavailable */ }
         showPhase("LOBBY");
     };
 
@@ -615,9 +1313,14 @@
         persistSnapshot();
     };
 
+    window.drawAnotherCard = function () {
+        if (!isShuffleMode()) { return; }
+        fetchFreshShuffleCard();
+    };
+
     /* ── boot ─────────────────────────────────────────────────── */
-    if (restoreSnapshot()) {
-        paintGrid();
+    if (bootstrapSnapshot()) {
+        paintBoard();
         showPhase(currentPhase);
     } else {
         showPhase("LOBBY");

@@ -1,15 +1,16 @@
 package com.socops.service;
 
+import com.socops.data.IcebreakerPrompts;
 import com.socops.model.BingoCell;
 import com.socops.model.WinningStreak;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,6 +21,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * provided by {@link BoardAssembler}.
  */
 class BoardAssemblerTests {
+
+    @SuppressWarnings("unchecked")
+    private static List<BingoCell> assembleNewScavengerHunt() {
+        try {
+            return (List<BingoCell>) BoardAssembler.class
+                    .getMethod("assembleNewScavengerHunt")
+                    .invoke(null);
+        } catch (ReflectiveOperationException exception) {
+            throw new AssertionError("BoardAssembler must expose a scavenger hunt assembly path", exception);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<BingoCell> assembleRandomPromptCard() {
+        try {
+            return (List<BingoCell>) BoardAssembler.class
+                    .getMethod("assembleRandomPromptCard")
+                    .invoke(null);
+        } catch (ReflectiveOperationException exception) {
+            throw new AssertionError("BoardAssembler must expose a card deck assembly path", exception);
+        }
+    }
 
     /* ── board creation ───────────────────────────────────────── */
 
@@ -51,6 +74,49 @@ class BoardAssemblerTests {
                         "Tile id=" + tile.id() + " should begin unselected");
             }
         }
+    }
+
+        @Test
+        @DisplayName("Scavenger Hunt assembly returns twenty-four unchecked prompt items with no free cell")
+        void scavengerHuntAssemblyProducesUncheckedPromptItemsWithoutFreeCell() {
+        List<BingoCell> generatedItems = assembleNewScavengerHunt();
+
+        assertEquals(IcebreakerPrompts.ALL_PROMPTS.size(), generatedItems.size(),
+            "Scavenger Hunt should expose one checklist item per prompt");
+        assertEquals(Set.copyOf(IcebreakerPrompts.ALL_PROMPTS),
+            generatedItems.stream().map(BingoCell::prompt).collect(Collectors.toSet()),
+            "Scavenger Hunt should reuse the full prompt catalogue without depending on order");
+
+        for (int expectedId = 0; expectedId < generatedItems.size(); expectedId++) {
+            BingoCell item = generatedItems.get(expectedId);
+            assertEquals(expectedId, item.id(),
+                "Checklist items should use compact zero-based identifiers");
+            assertFalse(item.selected(),
+                "Checklist item id=" + item.id() + " should begin unchecked");
+            assertFalse(item.freeCell(),
+                "Scavenger Hunt should not include a free cell");
+            assertFalse(IcebreakerPrompts.FREE_CELL_LABEL.equals(item.prompt()),
+                "Scavenger Hunt prompts must all come from the regular prompt catalogue");
+        }
+        }
+
+    @Test
+    @DisplayName("Card Deck Shuffle assembly returns one hidden prompt card from the shared prompt catalogue")
+    void cardDeckAssemblyProducesSinglePromptCard() {
+        List<BingoCell> generatedCard = assembleRandomPromptCard();
+
+        assertEquals(1, generatedCard.size(),
+            "Card Deck Shuffle should return exactly one prompt card");
+
+        BingoCell card = generatedCard.getFirst();
+        assertEquals(0, card.id(),
+            "Single-card mode should use a stable zero identifier");
+        assertFalse(card.selected(),
+            "Freshly dealt cards should stay face down until the player taps them");
+        assertFalse(card.freeCell(),
+            "Card Deck Shuffle should never create a free cell");
+        assertTrue(IcebreakerPrompts.ALL_PROMPTS.contains(card.prompt()),
+            "Card Deck Shuffle must draw from the shared prompt catalogue");
     }
 
     /* ── cell toggling ────────────────────────────────────────── */

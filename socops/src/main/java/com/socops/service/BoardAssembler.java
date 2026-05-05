@@ -49,6 +49,25 @@ public final class BoardAssembler {
         return freshBoard;
     }
 
+    /** Produce a fresh 24-item scavenger hunt checklist with no free cell. */
+    public static List<BingoCell> assembleNewScavengerHunt() {
+        var shuffledPrompts = new ArrayList<>(IcebreakerPrompts.ALL_PROMPTS);
+        Collections.shuffle(shuffledPrompts);
+
+        List<BingoCell> checklistItems = new ArrayList<>(shuffledPrompts.size());
+        for (int index = 0; index < shuffledPrompts.size(); index++) {
+            checklistItems.add(BingoCell.ofPrompt(index, shuffledPrompts.get(index)));
+        }
+        return checklistItems;
+    }
+
+    /** Produce a single prompt card for the Card Deck Shuffle mode. */
+    public static List<BingoCell> assembleRandomPromptCard() {
+        var shuffledPrompts = new ArrayList<>(IcebreakerPrompts.ALL_PROMPTS);
+        Collections.shuffle(shuffledPrompts);
+        return List.of(BingoCell.ofPrompt(0, shuffledPrompts.getFirst()));
+    }
+
     /* ------------------------------------------------------------------ */
     /*  Cell toggling                                                      */
     /* ------------------------------------------------------------------ */

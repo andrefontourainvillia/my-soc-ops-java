@@ -38,8 +38,8 @@ jobs:
         run: |
           mkdir -p ./_site
           
-          # Copy socops (workshop guide) to deployment root
-          cp -r socops/* ./_site/
+          # Copy docs (workshop guide) to deployment root
+          cp -r docs/* ./_site/
           
           # Prevent Jekyll processing
           touch ./_site/.nojekyll
